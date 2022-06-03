@@ -36,15 +36,13 @@ class PostFormTests(TestCase):
             data=form_data,
             follow=True
         )
-        self.assertRedirects(response, reverse('posts:profile',
-            args=[PostFormTests.user]))
+        self.assertRedirects(response,
+            reverse('posts:profile', args=[PostFormTests.user]))
         self.assertEqual(Post.objects.count(), posts_count+1)
         self.assertTrue(
             Post.objects.filter(
                 group=PostFormTests.group.id,
-                text='Новый пост'
-                ).exists()
-        )
+                text='Новый пост').exists())
 
     def test_post_edit(self):
         form_data = {

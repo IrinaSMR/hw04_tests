@@ -39,8 +39,8 @@ class PostPagesTest(TestCase):
             reverse('posts:group_list', args=[cls.group.slug]):
                 'posts/group_list.html',
             reverse('posts:post_create'): 'posts/create_post.html',
-            reverse('posts:post_edit',
-                kwargs={'post_id': cls.post.pk}): 'posts/create_post.html',
+            reverse('posts:post_edit', kwargs={'post_id': cls.post.pk}):
+                'posts/create_post.html',
             reverse('posts:profile', args=[cls.author.username]):
                 'posts/profile.html',
             reverse('posts:post_detail', kwargs={'post_id': cls.post.pk}):
@@ -91,10 +91,7 @@ class PostPagesTest(TestCase):
         """Шаблон post_detail сформирован с правильным контекстом."""
         response = PostPagesTest.guest_client.get(
             reverse('posts:post_detail',
-                kwargs={
-                    'post_id': PostPagesTest.post.pk
-                }
-            )
+                kwargs={'post_id': PostPagesTest.post.pk})
         )
         response_post = response.context.get('post')
         response_count = response.context.get('post_count')
@@ -157,8 +154,7 @@ class PaginatorViewsTest(TestCase):
 
         cls.templates = [reverse('posts:index'),
             reverse('posts:group_list', args=[cls.group.slug]),
-            reverse('posts:profile', args=[cls.author.username])
-        ]
+            reverse('posts:profile', args=[cls.author.username])]
 
     def test_first_page_contains_ten_records(self):
         """Paginator предоставляет ожидаемое количество постов
