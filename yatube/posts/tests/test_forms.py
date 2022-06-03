@@ -1,8 +1,6 @@
-from django.conf import settings
-from django.test import Client, TestCase, override_settings
+from django.test import Client, TestCase
 from django.urls import reverse
 
-from posts.forms import PostForm
 from posts.models import Group, Post, User
 
 
@@ -38,7 +36,8 @@ class PostFormTests(TestCase):
             data=form_data,
             follow=True
         )
-        self.assertRedirects(response, reverse('posts:profile', args=[PostFormTests.user]))
+        self.assertRedirects(response, reverse('posts:profile',
+            args=[PostFormTests.user]))
         self.assertEqual(Post.objects.count(), posts_count+1)
         self.assertTrue(
             Post.objects.filter(

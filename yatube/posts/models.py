@@ -36,7 +36,7 @@ class Post(models.Model):
         null=True,
         verbose_name='Группа',
         help_text='Группа, к которой будет относиться пост'
-    )    
+    )
 
     def __str__(self):
         return self.text[:15]

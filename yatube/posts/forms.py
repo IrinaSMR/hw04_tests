@@ -12,7 +12,6 @@ class PostForm(ModelForm):
         labels = {'group': 'Группа', 'text': 'Текст'}
         help_texts = {'text': ('Обязательное поле для заполнения')}
 
-
     def clean_slug(self):
         """Обрабатывает случай, если slug не уникален."""
         cleaned_data = super().clean()
@@ -25,4 +24,4 @@ class PostForm(ModelForm):
                 f'Адрес "{slug}" уже существует, '
                 'придумайте уникальное значение'
             )
-        return slug         
+        return slug

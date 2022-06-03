@@ -1,5 +1,4 @@
 from django import forms
-from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
 from django.urls import reverse
@@ -41,24 +40,24 @@ class PostPagesTest(TestCase):
             reverse(
                 'posts:group_list',
                 args=[cls.group.slug]
-            ): 'posts/group_list.html',
+                ): 'posts/group_list.html',
 
             reverse('posts:post_create'): 'posts/create_post.html',
             reverse('posts:post_edit',
                     kwargs={
                         'post_id': cls.post.pk
                     }
-            ): 'posts/create_post.html',
+                    ): 'posts/create_post.html',
 
             reverse('posts:profile',
                     args=[cls.author.username]
-            ): 'posts/profile.html',
+                    ): 'posts/profile.html',
 
             reverse('posts:post_detail',
                     kwargs={
                         'post_id': cls.post.pk
                     }
-            ): 'posts/post_detail.html',
+                    ): 'posts/post_detail.html',
 
             reverse('about:author'): 'about/author.html',
 
@@ -82,7 +81,6 @@ class PostPagesTest(TestCase):
                     reverse_name
                 )
                 self.assertTemplateUsed(response, template)
-
 
     def test_index_shows_correct_context(self):
         """Шаблон index сформирован с правильным контекстом."""
@@ -138,11 +136,8 @@ class PostPagesTest(TestCase):
         """Шаблон post_edit сформирован с правильным контекстом."""
         response = PostPagesTest.auth_author_client.get(
             reverse('posts:post_edit',
-                    kwargs={
-                    'post_id': PostPagesTest.post.pk
-                    }
-                    )
-        )
+                    kwargs={'post_id': PostPagesTest.post.pk}))
+
         for value, expected in PostPagesTest.form_fields.items():
             with self.subTest(value=value):
                 form_field = response.context['form'].fields[value]

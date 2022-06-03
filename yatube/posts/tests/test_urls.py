@@ -2,7 +2,6 @@ from http import HTTPStatus
 
 from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
-from django.urls import reverse
 
 from posts.models import Group, Post
 
@@ -24,13 +23,13 @@ class PostsUrlTest(TestCase):
             text='Тестовая запись нового поста',
             id=1
         )
-    
+
     def setUp(self):
         self.guest_client = Client()
         self.authorized_client = Client()
         self.authorized_client.force_login(PostsUrlTest.user)
 
-    def test_url_authorized_access(self):            
+    def test_url_authorized_access(self):
         """Проверка доступа авторизированного пользователя"""
         url_status_authorized = {
             '/create/': HTTPStatus.OK,
@@ -65,8 +64,8 @@ class PostsUrlTest(TestCase):
         for address, status in url_status_unauthorized.items():
             with self.subTest(address=address):
                 response = self.guest_client.get(address)
-                self.assertEqual(response.status_code, status)            
-    
+                self.assertEqual(response.status_code, status)
+
     def test_url_templates(self):
         """Проверка соответствия шаблонов URL-адресу"""
         templates_url_names = {
