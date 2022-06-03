@@ -93,7 +93,7 @@ class PostPagesTest(TestCase):
             reverse(
                 'posts:post_detail',
                 kwargs={'post_id': PostPagesTest.post.pk})
-                )
+            )
         response_post = response.context.get('post')
         response_count = response.context.get('post_count')
         self.assertEqual(response_post.author, PostPagesTest.author)
@@ -157,7 +157,7 @@ class PaginatorViewsTest(TestCase):
             reverse('posts:index'),
             reverse('posts:group_list', args=[cls.group.slug]),
             reverse('posts:profile', args=[cls.author.username])
-            ]
+        ]
 
     def test_first_page_contains_ten_records(self):
         """Paginator предоставляет ожидаемое количество постов
