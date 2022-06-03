@@ -50,14 +50,13 @@ class PostPagesTest(TestCase):
             'text': forms.fields.CharField,
             'group': forms.fields.ChoiceField
         }
- 
+
     def setUp(self):
         self.guest_client = Client()
         self.auth_author_client = Client()
         self.auth_author_client.force_login(self.author)
         self.authorized_not_author_client = Client()
-        self.authorized_not_author_client.force_login(self.not_author)   
-
+        self.authorized_not_author_client.force_login(self.not_author)
 
     def test_pages_use_correct_template(self):
         """URL-адрес использует соответствующий шаблон."""

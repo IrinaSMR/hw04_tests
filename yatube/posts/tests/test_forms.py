@@ -6,6 +6,7 @@ from posts.models import Group, Post, User
 NEW_TEXT = 'Новый пост'
 UPDATED_TEXT = 'Обновленный текст'
 
+
 class PostFormTests(TestCase):
     @classmethod
     def setUpClass(cls):
