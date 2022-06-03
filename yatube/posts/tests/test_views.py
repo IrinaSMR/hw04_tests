@@ -90,9 +90,10 @@ class PostPagesTest(TestCase):
     def test_post_detail_shows_correct_context(self):
         """Шаблон post_detail сформирован с правильным контекстом."""
         response = PostPagesTest.guest_client.get(
-            reverse('posts:post_detail',
+            reverse(
+                'posts:post_detail',
                 kwargs={'post_id': PostPagesTest.post.pk})
-        )
+                )
         response_post = response.context.get('post')
         response_count = response.context.get('post_count')
         self.assertEqual(response_post.author, PostPagesTest.author)
@@ -152,9 +153,11 @@ class PaginatorViewsTest(TestCase):
                 author=cls.author
             )
 
-        cls.templates = [reverse('posts:index'),
+        cls.templates = [
+            reverse('posts:index'),
             reverse('posts:group_list', args=[cls.group.slug]),
-            reverse('posts:profile', args=[cls.author.username])]
+            reverse('posts:profile', args=[cls.author.username])
+            ]
 
     def test_first_page_contains_ten_records(self):
         """Paginator предоставляет ожидаемое количество постов
