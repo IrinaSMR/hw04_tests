@@ -93,7 +93,7 @@ class PostPagesTest(TestCase):
             reverse(
                 'posts:post_detail',
                 kwargs={'post_id': PostPagesTest.post.pk})
-            )
+        )
         response_post = response.context.get('post')
         response_count = response.context.get('post_count')
         self.assertEqual(response_post.author, PostPagesTest.author)
