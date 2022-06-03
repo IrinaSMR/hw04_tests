@@ -36,31 +36,16 @@ class PostPagesTest(TestCase):
         )
         cls.template_names = {
             reverse('posts:index'): 'posts/index.html',
-
-            reverse(
-                'posts:group_list',
-                args=[cls.group.slug]
-                ): 'posts/group_list.html',
-
+            reverse('posts:group_list', args=[cls.group.slug]):
+                'posts/group_list.html',
             reverse('posts:post_create'): 'posts/create_post.html',
             reverse('posts:post_edit',
-                    kwargs={
-                        'post_id': cls.post.pk
-                    }
-                    ): 'posts/create_post.html',
-
-            reverse('posts:profile',
-                    args=[cls.author.username]
-                    ): 'posts/profile.html',
-
-            reverse('posts:post_detail',
-                    kwargs={
-                        'post_id': cls.post.pk
-                    }
-                    ): 'posts/post_detail.html',
-
+                kwargs={'post_id': cls.post.pk}): 'posts/create_post.html',
+            reverse('posts:profile', args=[cls.author.username]):
+                'posts/profile.html',
+            reverse('posts:post_detail', kwargs={'post_id': cls.post.pk}):
+                'posts/post_detail.html',
             reverse('about:author'): 'about/author.html',
-
             reverse('about:tech'): 'about/tech.html'
         }
         cls.form_fields = {
@@ -77,9 +62,7 @@ class PostPagesTest(TestCase):
 
         for reverse_name, template in PostPagesTest.template_names.items():
             with self.subTest(template=template):
-                response = PostPagesTest.auth_author_client.get(
-                    reverse_name
-                )
+                response = PostPagesTest.auth_author_client.get(reverse_name)
                 self.assertTemplateUsed(response, template)
 
     def test_index_shows_correct_context(self):
@@ -107,8 +90,7 @@ class PostPagesTest(TestCase):
     def test_post_detail_shows_correct_context(self):
         """Шаблон post_detail сформирован с правильным контекстом."""
         response = PostPagesTest.guest_client.get(
-            reverse(
-                'posts:post_detail',
+            reverse('posts:post_detail',
                 kwargs={
                     'post_id': PostPagesTest.post.pk
                 }
