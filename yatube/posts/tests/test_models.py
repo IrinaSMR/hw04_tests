@@ -45,11 +45,14 @@ class PostModelTest(TestCase):
                 self.assertEqual(
                     post._meta.get_field(field).help_text, expected_value)
 
-    def test_models_have_correct_object_names(self):
-        """Проверяем, что у моделей корректно работает __str__."""
+    def test_post_model_has_correct_object_name(self):
+        """Проверяем, что у моделей post корректно работает __str__."""
         post = PostModelTest.post
-        group = PostModelTest.group
         expected_object_post = post.text[:15]
+        self.assertEqual(expected_object_post, str(post))
+
+    def test_group_model_has_correct_object_name(self):
+        """Проверяем, что у моделей group корректно работает __str__."""
+        group = PostModelTest.group
         expected_object_group = group.title
         self.assertEqual(expected_object_group, str(group))
-        self.assertEqual(expected_object_post, str(post))

@@ -3,6 +3,8 @@ from django.urls import reverse
 
 from posts.models import Group, Post, User
 
+NEW_TEXT = 'Новый пост'
+UPDATED_TEXT = 'Обновленный текст'
 
 class PostFormTests(TestCase):
     @classmethod
@@ -29,7 +31,7 @@ class PostFormTests(TestCase):
         posts_count = Post.objects.count()
         form_data = {
             'group': PostFormTests.group.id,
-            'text': 'Новый пост'
+            'text': NEW_TEXT
         }
         response = self.authorized_client.post(
             reverse('posts:post_create'),
@@ -42,15 +44,15 @@ class PostFormTests(TestCase):
         self.assertTrue(
             Post.objects.filter(
                 group=PostFormTests.group.id,
-                text='Новый пост').exists())
+                text=NEW_TEXT).exists())
 
     def test_post_edit(self):
         form_data = {
             'group': self.group.id,
-            'text': 'Обновленный текст',
+            'text': UPDATED_TEXT,
         }
         self.authorized_client.post(
             reverse('posts:post_edit', kwargs={'post_id': self.post.id}),
             data=form_data, follow=True)
         result = Post.objects.get(id=self.post.id)
-        self.assertEqual(result.text, 'Обновленный текст')
+        self.assertEqual(result.text, UPDATED_TEXT)
